@@ -5,7 +5,7 @@ module Jekyll
       def generate(site)
         %w(posts pages static_files docs_to_write).each do |type|
           site.send(type).each do |item|
-            item.data['last_modified_at'] = Determinator.new(site.source, item.path)
+            item.data['last_modified_at'] = Determinator.new(site.source, item.path) if item.respond_to?(:data)
           end
         end
       end
