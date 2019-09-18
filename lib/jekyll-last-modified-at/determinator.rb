@@ -21,7 +21,7 @@ module Jekyll
           raise Errno::ENOENT, "#{absolute_path_to_article} does not exist!"
         end
 
-        Time.at(last_modified_at_unix.to_i)
+        updated_at_from_git
       end
 
       def last_modified_at_unix
@@ -86,9 +86,14 @@ module Jekyll
         Executor.sh("git log -n 1 --pretty=format:%H -- #{file}")
       end
 
+      def updated_at_from_git
+        last_commit_date(file_commit_id(absolute_path_to_article))
+      end
+
       def mtime(file)
-        last_commit_date(file_commit_id(file))
+        File.mtime(file)
       end
     end
   end
 end
+
