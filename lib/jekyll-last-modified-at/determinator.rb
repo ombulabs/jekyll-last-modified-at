@@ -78,8 +78,16 @@ module Jekyll
         end
       end
 
+      def last_commit_date(commit_id)
+        Executor.sh("git show -s --format=%ci #{commit_id}")
+      end
+
+      def file_commit_id(file)
+        Executor.sh("git log -n 1 --pretty=format:%H -- #{file}")
+      end
+
       def mtime(file)
-        File.mtime(file)
+        last_commit_date(file_commit_id(file))
       end
     end
   end
