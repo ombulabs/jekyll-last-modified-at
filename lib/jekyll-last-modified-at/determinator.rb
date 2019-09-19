@@ -4,6 +4,8 @@ module Jekyll
       attr_reader :site_source, :page_path, :opts
 
       def initialize(site_source, page_path, opts = {})
+        puts site_source
+        puts page_path
         @site_source = site_source
         @page_path   = page_path
         @opts        = opts
