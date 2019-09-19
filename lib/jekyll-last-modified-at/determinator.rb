@@ -21,6 +21,7 @@ module Jekyll
           raise Errno::ENOENT, "#{absolute_path_to_article} does not exist!"
         end
 
+        puts updated_at_from_git
         updated_at_from_git
       end
 
